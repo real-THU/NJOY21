@@ -420,6 +420,7 @@
     "src/njoy21/input/PURR/Card3/Temp.hpp",
     "src/njoy21/input/PURR/Card4/Sigz.hpp",
     "src/njoy21/input/LEAPR/Card2.hpp",
+    "src/njoy21/input/LEAPR/Card4.hpp",
     "src/njoy21/input/LEAPR/Card3.hpp",
     "src/njoy21/input/LEAPR/Card1.hpp",
     "src/njoy21/input/LEAPR/Card1/Nout.hpp",
@@ -427,6 +428,8 @@
     "src/njoy21/input/LEAPR/Card3/Nphon.hpp",
     "src/njoy21/input/LEAPR/Card3/Ntempr.hpp",
     "src/njoy21/input/LEAPR/Card3/Iprint.hpp",
+    "src/njoy21/input/LEAPR/Card4/Za.hpp",
+    "src/njoy21/input/LEAPR/Card4/Mat.hpp",
     "src/njoy21/input/ACER/Card2.hpp",
     "src/njoy21/input/ACER/Card5.hpp",
     "src/njoy21/input/ACER/Card11.hpp",
@@ -1273,6 +1276,12 @@
     ],
     "njoy21.input.LEAPR.Card3.Ntempr": [
       "src/njoy21/input/LEAPR/Card3/Ntempr/test/Ntempr.test.cpp"
+    ],
+    "njoy21.input.LEAPR.Card4.Mat": [
+      "src/njoy21/input/LEAPR/Card4/Mat/test/Mat.test.cpp"
+    ],
+    "njoy21.input.LEAPR.Card4.Za": [
+      "src/njoy21/input/LEAPR/Card4/Za/test/Za.test.cpp"
     ],
     "njoy21.input.Label": [
       "src/njoy21/input/Label/test/Label.test.cpp"
