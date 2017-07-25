@@ -10,18 +10,18 @@ SCENARIO( "nout input values",
       iRecordStream<char> is( std::istringstream( "2 0 99" ) );
       THEN( "the extracted values are correct" ){
         LEAPR::Card3 card3( is );
-	REQUIRE( card3.ntempr.value == 2 );
-	REQUIRE( card3.iprint.value == 0 );
-	REQUIRE( card3.nphon.value  == 99 );
+        REQUIRE( card3.ntempr.value == 2 );
+        REQUIRE( card3.iprint.value == 0 );
+        REQUIRE( card3.nphon.value  == 99 );
       } // THEN
     } // WHEN
     WHEN( "optional card3 inputs not provided" ){
       iRecordStream<char> is( std::istringstream( "/" ) );
       THEN( "the extracted values are correct" ){
         LEAPR::Card3 card3( is );
-	REQUIRE( card3.ntempr.value == 1 );
-	REQUIRE( card3.iprint.value == 1 );
-	REQUIRE( card3.nphon.value  == 100 );
+        REQUIRE( card3.ntempr.value == 1 );
+        REQUIRE( card3.iprint.value == 1 );
+        REQUIRE( card3.nphon.value  == 100 );
       } // THEN
     } // WHEN
   } // GIVEN

@@ -428,8 +428,10 @@
     "src/njoy21/input/LEAPR/Card3/Nphon.hpp",
     "src/njoy21/input/LEAPR/Card3/Ntempr.hpp",
     "src/njoy21/input/LEAPR/Card3/Iprint.hpp",
+    "src/njoy21/input/LEAPR/Card4/Isabt.hpp",
     "src/njoy21/input/LEAPR/Card4/Za.hpp",
     "src/njoy21/input/LEAPR/Card4/Mat.hpp",
+    "src/njoy21/input/LEAPR/Card4/Ilog.hpp",
     "src/njoy21/input/ACER/Card2.hpp",
     "src/njoy21/input/ACER/Card5.hpp",
     "src/njoy21/input/ACER/Card11.hpp",
@@ -1276,6 +1278,15 @@
     ],
     "njoy21.input.LEAPR.Card3.Ntempr": [
       "src/njoy21/input/LEAPR/Card3/Ntempr/test/Ntempr.test.cpp"
+    ],
+    "njoy21.input.LEAPR.Card4": [
+      "src/njoy21/input/LEAPR/Card4/test/Card4.test.cpp"
+    ],
+    "njoy21.input.LEAPR.Card4.Ilog": [
+      "src/njoy21/input/LEAPR/Card4/Ilog/test/Ilog.test.cpp"
+    ],
+    "njoy21.input.LEAPR.Card4.Isabt": [
+      "src/njoy21/input/LEAPR/Card4/Isabt/test/Isabt.test.cpp"
     ],
     "njoy21.input.LEAPR.Card4.Mat": [
       "src/njoy21/input/LEAPR/Card4/Mat/test/Mat.test.cpp"

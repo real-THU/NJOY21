@@ -12,7 +12,7 @@ SCENARIO( "Za input values",
       for( auto& za : validValues ){
         iRecordStream<char> iss(
           std::istringstream( std::to_string( za ) ) );
-	REQUIRE( za == argument::extract< LEAPR::Card4::Za >( iss ).value );
+        REQUIRE( za == argument::extract< LEAPR::Card4::Za >( iss ).value );
       }
     } // THEN
   } // GIVEN
