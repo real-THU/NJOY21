@@ -13,6 +13,6 @@ struct Nout : argument::common::Nout {
 		      const Argument< Nendf >& nendf,
 		      const Argument< Nin >& nin ){
     return argument::common::Nout::verify( v, nin )
-      and ( std::abs(v) != std::abs( nendf.value ) );
+      and  argument::common::Nout::verify( v, nendf );
   }
 };
