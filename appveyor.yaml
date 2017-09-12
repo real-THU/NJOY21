@@ -1,15 +1,50 @@
-image:
-  - Visual Studio 2017
+image: Visual Studio 2017
+environment:
+  -
+    machine_user: test_user
+  -
+    machine_pass: awesomepassword
+  -
+    CTEST_OUTPUT_ON_FAILURE: 1
+  -
+    CC: gcc
+  -
+    CXX: g++
+  -
+    FC: gfortran
+  -
+    global:
+      -
+        CYG_ROOT: "C:\\cygwin"
+      -
+        CYG_MIRROR: "http://cygwin.mirror.constant.com"
+      -
+        CYG_CACHE: "C:\\cygwin\\var\\cache\\setup"
+      -
+        CYG_BASH: "C:\\cygwin\\bin\\bash"
+  -
+    matrix:
+      -
+        BUILD_TYPE: release
+      -
+        STATIC_LIBRARIES: false
+install:
+  - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3"
 clone_folder: c:\projects\NJOY21
 build_script:
 - cmd: >-
+    python3 ./metaconfigure/generate.py cmake
+
     mkdir build
 
     cd build
 
-    cmake c:\projects\source -G "Visual Studio 15"
+    cmake c:\projects\NJOY21 -G "Visual Studio 15"
 
     cmake --build . --config "Debug"
 
 test_script:
-- cmd: ctest
+- cmd:>-
+    cd build
+
+    ctest
