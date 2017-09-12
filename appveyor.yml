@@ -14,8 +14,8 @@ environment:
     CYG_CACHE: "C:\\cygwin\\var\\cache\\setup"
     CYG_BASH: "C:\\cygwin\\bin\\bash"
   matrix:
-    BUILD_TYPE: release
-    STATIC_LIBRARIES: false
+    - BUILD_TYPE: release
+      STATIC_LIBRARIES: false
 install:
   - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3"
 clone_folder: c:\projects\NJOY21
