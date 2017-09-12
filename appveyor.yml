@@ -23,7 +23,7 @@ install:
 clone_folder: c:\projects\NJOY21
 build_script:
 - 
-    %CYG_BASH% python ./metaconfigure/generate.py cmake
+    python ./metaconfigure/generate.py cmake
 
     mkdir build
 
