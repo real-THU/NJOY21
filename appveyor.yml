@@ -20,15 +20,16 @@ install:
   - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3"
 clone_folder: c:\projects\NJOY21
 build_script:
-- "%CYG_BASH% python ./metaconfigure/generate.py cmake
+- 
+    python ./metaconfigure/generate.py cmake
 
     mkdir build
 
     cd build
 
-    cmake c:\projects\NJOY21 -G \"Visual Studio 15\"
+    cmake c:\projects\NJOY21 -G "Visual Studio 15"
 
-    cmake --build . --config \"Debug\""
+    cmake --build . --config "Debug"
 
 test_script:
 - cmd:>-
