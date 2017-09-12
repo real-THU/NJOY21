@@ -1,8 +1,0 @@
-project('NJOY21', 'cpp',
-  default_options : ['warning_level=3',
-                     'cpp_std=c++14'])
-
-executable('njoy21', 'src/main.cpp')
-
-tester = executable('tester', 'ctest')
-test('Tester', tester)
