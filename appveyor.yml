@@ -31,6 +31,8 @@ before_build:
   - bash -c "cd subprojects"
   - bash -c "tree"
   - bash -c "cd .."
+  - bash -c "ls -la"
+  - bash -c "ls -la ./metaconfigure/"
   - bash -c "python3 ./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
   - cd build
