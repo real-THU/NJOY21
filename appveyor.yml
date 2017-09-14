@@ -26,7 +26,7 @@ before_build:
   - set PATH=C:\cygwin\bin;%PATH%
   - bash -c "pwd"
   - bash -c "ls -la"
-  - bash -c "./metaconfigure/fetch_subprojects.py"
+  - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "ls -la"
   - bash -c "ls -la ./subprojects/"
   - bash -c "ls -la ./metaconfigure/"
@@ -39,7 +39,7 @@ before_build:
   - bash -c "which python3"
   - bash -c "python3 --version"
   - bash -c "find . -regex '.*json'"
-  - bash -c "./metaconfigure/generate.py cmake"
+  - bash -c "python 3 ./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
   - cd build
   - bash -c "pwd"
