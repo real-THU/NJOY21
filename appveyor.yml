@@ -25,7 +25,9 @@ before_build:
   - cd C:\cygwin\projects\NJOY21\
   - set PATH=C:\cygwin\bin;%PATH%
   - bash -c "pwd"
+  - bash -c "ls -la"
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
+  - bash -c "ls -la"
   - bash -c "python3 ./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
   - cd build
