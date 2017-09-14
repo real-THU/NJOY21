@@ -16,32 +16,26 @@ environment:
     CYG_BASH: "C:\\cygwin\\bin\\bash"
   matrix:
     - BUILD_TYPE: release
+      PLATFORM: cygwin
       STATIC_LIBRARIES: false
 install:
   - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3"
   - cd C:\cygwin\projects\
 #  - git submodule update --init --recursive
 clone_folder: "C:\\cygwin\\projects\\NJOY21"
+before_build:
+  - cd C:\cygwin\projects\NJOY21\
+  - set PATH=C:\cygwin\bin;%PATH%
+  - bash -c "autoreconf -i"
+  - bash -c "python ./metaconfigure/fetch_subprojects.py"
+  - bash -c "python ./metaconfigure/generate.py cmake"
+  - bash -c "mkdir build"
+  - bash -c "cd build"
 build_script:
 -
-    cd C:\cygwin\projects\NJOY21\
-
-    bash -c "python ./metaconfigure/fetch_subprojects.py"
-
-    bash -c "python ./metaconfigure/generate.py cmake ."
-
-    mkdir build
-
-    cd build
-
     bash -c "cmake -D unit_tests=ON .."
 
     bash -c "make -j2"
-
-#    cmake c:\projects\NJOY21 -G "Visual Studio 15"
-
-#    cmake --build . --config "Debug"
-
 test_script:
 - cmd:>-
     cd build
