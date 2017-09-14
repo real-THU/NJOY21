@@ -38,6 +38,7 @@ before_build:
   - bash -c "python --version"
   - bash -c "which python3"
   - bash -c "python3 --version"
+  - bash -c "find . -regex '.*json'"
   - bash -c "./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
   - cd build
