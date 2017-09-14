@@ -27,14 +27,13 @@ before_build:
   - bash -c "pwd"
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "python3 ./metaconfigure/generate.py cmake"
-  - bash -c "mkdir C:\\cygwin\\projects\\NJOY21\\build"
-  - bash -c "cd C:\\cygwin\\projects\\NJOY21\\build"
+  - bash -c "mkdir build"
+  - bash -c "cd ./build"
+  - bash -c "pwd"
   - bash -c "cmake -D unit_tests=ON .."
 build_script:
 -
     bash -c "make -j2"
 test_script:
 - cmd:>-
-    cd build
-
     bash -c "ctest -j2"
