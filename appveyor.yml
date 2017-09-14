@@ -26,17 +26,17 @@ build_script:
 -
     cd C:\cygwin\projects\NJOY21\
 
-    python ./metaconfigure/fetch_subprojects.py 
+    bash -c "python ./metaconfigure/fetch_subprojects.py"
 
-    python ./metaconfigure/generate.py cmake .
+    bash -c "python ./metaconfigure/generate.py cmake ."
 
     mkdir build
 
     cd build
 
-    cmake -D unit_tests=ON ..
+    bash -c "cmake -D unit_tests=ON .."
 
-    make -j2
+    bash -c "make -j2"
 
 #    cmake c:\projects\NJOY21 -G "Visual Studio 15"
 
@@ -46,4 +46,4 @@ test_script:
 - cmd:>-
     cd build
 
-    ctest
+    bash -c "ctest -j2"
