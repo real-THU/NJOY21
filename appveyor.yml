@@ -32,8 +32,6 @@ before_build:
   - bash -c "ls -la ./metaconfigure/"
   - bash -c "which gcc"
   - bash -c "gcc --version"
-  - bash -c "which gfortran"
-  - bash -c "gfortran --version"
   - bash -c "which g++"
   - bash -c "g++ --version"
   - bash -c "which python"
