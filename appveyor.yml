@@ -19,7 +19,7 @@ environment:
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
 install:
-  - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3,tree --force-current"
+  - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gcc-fortran,cmake,make,git,python3,tree --force-current"
 clone_folder: C:\cygwin\projects\NJOY21
 before_build:
   - cd C:\cygwin\projects\NJOY21\
@@ -28,7 +28,7 @@ before_build:
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "mkdir build"
   - cd build
-  - bash -c "cmake .."
+  - bash -c "cmake -G \"Unix Makefiles\" .."
 build_script:
 -
     bash -c "make -j2"
