@@ -32,9 +32,13 @@ build_script:
 
     cd build
 
-    cmake c:\projects\NJOY21 -G "Visual Studio 15"
+#    cmake c:\projects\NJOY21 -G "Visual Studio 15"
 
-    cmake --build . --config "Debug"
+#    cmake --build . --config "Debug"
+
+    cmake -D unit_tests=ON ..
+
+    make -j2
 
 test_script:
 - cmd:>-
