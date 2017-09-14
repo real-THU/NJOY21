@@ -1,6 +1,7 @@
 image: 
   -
     Visual Studio 2017
+shallow_clone: true
 environment:
   machine_user: test_user
   machine_pass: awesomepassword
@@ -22,8 +23,10 @@ install:
   - git submodule update --init --recursive
 clone_folder: c:\projects\NJOY21
 build_script:
-- 
-    python ./metaconfigure/generate.py cmake
+-
+    python ./metaconfigure/fetch_subprojects.py 
+
+    python ./metaconfigure/generate.py cmake .
 
     mkdir build
 
