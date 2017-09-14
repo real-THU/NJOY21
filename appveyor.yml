@@ -26,8 +26,8 @@ before_build:
   - set PATH=C:\cygwin\bin;%PATH%
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "python3 ./metaconfigure/generate.py cmake"
-  - bash -c "mkdir build"
-  - bash -c "cd build"
+  - bash -c "mkdir C:\\cygwin\\projects\\NJOY21\\build"
+  - bash -c "cd C:\\cygwin\\projects\\NJOY21\\build"
   - bash -c "cmake -D unit_tests=ON .."
 build_script:
 -
