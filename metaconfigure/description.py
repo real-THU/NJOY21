@@ -10,7 +10,7 @@ from metaconfigure import configuration
 
 
 def serialize(state):
-    with open("metaconfigure/description.json", "w") as json_file:
+    with open("./metaconfigure/description.json", "w") as json_file:
         project_path = state.pop('project path')
         subprojects = state.pop('subprojects')
         json_file.write(json.dumps(state, indent=2, sort_keys=True))
@@ -19,7 +19,7 @@ def serialize(state):
 
 
 def deserialize():
-    with open("metaconfigure/description.json", "r") as json_file:
+    with open("./metaconfigure/description.json", "r") as json_file:
         state = json.loads(json_file.read())
         state['project path'] = os.getcwd()
         state['subprojects'] = {}
@@ -28,7 +28,7 @@ def deserialize():
 
 def collect_subprojects(state, root):
     if os.path.isdir(os.path.join(os.getcwd(), 'dependencies')):
-        os.chdir('dependencies')
+        os.chdir('./dependencies')
         anchor = os.getcwd()
         for name in os.listdir(os.getcwd()):
             if os.path.isdir(os.path.join(os.getcwd(), name)):
