@@ -28,6 +28,9 @@ before_build:
   - bash -c "ls -la"
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "ls -la"
+  - bash -c "cd subprojects"
+  - bash -c "tree"
+  - bash -c "cd .."
   - bash -c "python3 ./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
   - cd build
