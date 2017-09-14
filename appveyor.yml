@@ -20,20 +20,17 @@ environment:
       STATIC_LIBRARIES: false
 install:
   - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3"
-  - cd C:\cygwin\projects\
-#  - git submodule update --init --recursive
-clone_folder: "C:\\cygwin\\projects\\NJOY21"
+clone_folder: C:\cygwin\projects\NJOY21
 before_build:
   - cd C:\cygwin\projects\NJOY21\
   - set PATH=C:\cygwin\bin;%PATH%
-  - bash -c "python ./metaconfigure/fetch_subprojects.py"
-  - bash -c "python ./metaconfigure/generate.py cmake"
+  - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
+  - bash -c "python3 ./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
   - bash -c "cd build"
+  - bash -c "cmake -D unit_tests=ON .."
 build_script:
 -
-    bash -c "cmake -D unit_tests=ON .."
-
     bash -c "make -j2"
 test_script:
 - cmd:>-
