@@ -19,7 +19,7 @@ environment:
       STATIC_LIBRARIES: false
 install:
   - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gfortran,cmake,make,git,python3"
-  - cd C:\projects\NJOY21
+  - cd "C:\\cygwin\\projects\NJOY21"
 #  - git submodule update --init --recursive
 clone_folder: "C:\\cygwin\\projects\NJOY21"
 build_script:
