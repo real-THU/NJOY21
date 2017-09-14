@@ -26,7 +26,6 @@ clone_folder: "C:\\cygwin\\projects\\NJOY21"
 before_build:
   - cd C:\cygwin\projects\NJOY21\
   - set PATH=C:\cygwin\bin;%PATH%
-  - bash -c "autoreconf -i"
   - bash -c "python ./metaconfigure/fetch_subprojects.py"
   - bash -c "python ./metaconfigure/generate.py cmake"
   - bash -c "mkdir build"
