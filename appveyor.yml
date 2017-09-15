@@ -33,5 +33,5 @@ build_script:
 -
     bash -c "make -j2"
 test_script:
-- cmd:>-
+- 
     bash -c "ctest -j2"
