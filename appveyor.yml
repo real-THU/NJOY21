@@ -6,8 +6,6 @@ environment:
   machine_user: test_user
   machine_pass: awesomepassword
   CTEST_OUTPUT_ON_FAILURE: 1
-  CC: gcc
-  CXX: g++
   FC: gfortran
   global:
     CYG_ROOT: "C:\\cygwin"
@@ -18,17 +16,53 @@ environment:
     - BUILD_TYPE: debug
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
+      CC: gcc
+      CXX: g++
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: gcc
+      CXX: g++
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: gcc
+      CXX: g++
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: gcc
+      CXX: g++
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: clang
+      CXX: clang++
 install:
-  - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages gcc,g++,gcc-fortran,cmake,make,git,python3,tree --force-current"
+  - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages clang,gcc,g++,gcc-fortran,cmake,make,git,python3,tree --force-current"
 clone_folder: C:\cygwin\projects\NJOY21
 before_build:
   - cd C:\cygwin\projects\NJOY21\
   - set PATH=C:\cygwin\bin;%PATH%
-  - bash -c "pwd"
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "mkdir build"
   - cd build
-  - bash -c "cmake -D unit_tests=ON -G \"Unix Makefiles\" .."
+  - bash -c "cmake -D unit_tests=OFF -G \"Unix Makefiles\" -Wsubobject-linkage .."
 build_script:
 -
     bash -c "make -j2"
