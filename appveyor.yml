@@ -15,7 +15,7 @@ environment:
     CYG_CACHE: "C:\\cygwin\\var\\cache\\setup"
     CYG_BASH: "C:\\cygwin\\bin\\bash"
   matrix:
-    - BUILD_TYPE: release
+    - BUILD_TYPE: debug
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
 install:
@@ -28,7 +28,7 @@ before_build:
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "mkdir build"
   - cd build
-  - bash -c "cmake -D unit_tests=OFF -G \"Unix Makefiles\" .."
+  - bash -c "cmake -D unit_tests=ON -G \"Unix Makefiles\" .."
 build_script:
 -
     bash -c "make -j2"
