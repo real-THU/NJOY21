@@ -33,22 +33,22 @@ environment:
       STATIC_LIBRARIES: true
       CC: gcc
       CXX: g++
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: clang
-      CXX: clang++
     - BUILD_TYPE: release
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
       CC: clang
       CXX: clang++
-    - BUILD_TYPE: debug
+    - BUILD_TYPE: release
       PLATFORM: cygwin
       STATIC_LIBRARIES: true
       CC: clang
       CXX: clang++
-    - BUILD_TYPE: release
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: debug
       PLATFORM: cygwin
       STATIC_LIBRARIES: true
       CC: clang
