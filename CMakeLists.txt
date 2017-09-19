@@ -707,6 +707,10 @@ message( STATUS "APPLE: " ${APPLE} )
 
 message( STATUS "PREFIX: " ${PREFIX} )
 
+message( STATUS "compile options name: " ${PREFIX}"_common_flags" )
+
+message( STATUS "compile options: " ${${PREFIX}_common_flags} )
+
 if ( NOT is_subproject )
     add_executable( NJOY21_executable src/main.cpp )
     set_target_properties( NJOY21_executable PROPERTIES OUTPUT_NAME NJOY21 )
