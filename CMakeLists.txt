@@ -164,7 +164,6 @@ set( NJOY21_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( NJOY21_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( NJOY21_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( NJOY21_AppleClang_Darwin_static_flags "-static" )
-
 set( NJOY21_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
 set( NJOY21_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( NJOY21_RELEASE_flags "-O3" "-DNDEBUG" )
