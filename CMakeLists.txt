@@ -70,7 +70,7 @@ if ( profile_generate )
     file( MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/profiling" )
 endif()
 
-set( NJOY21_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( NJOY21_Clang_Linux_common_flags "-stdlib=libstdc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++11" )
 set( NJOY21_Clang_Linux_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( NJOY21_Clang_Linux_RELEASE_flags "-O3" "-DNDEBUG" )
 set( NJOY21_Clang_Linux_strict_flags "-Werror" )
@@ -94,7 +94,7 @@ set( NJOY21_Clang_Windows_link_time_optimization_flags "-flto" )
 set( NJOY21_Clang_Windows_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( NJOY21_Clang_Windows_nonportable_optimization_flags "-march=native" )
 set( NJOY21_Clang_Windows_static_flags "-static" )
-set( NJOY21_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( NJOY21_Clang_Darwin_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++11" )
 set( NJOY21_Clang_Darwin_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
 set( NJOY21_Clang_Darwin_RELEASE_flags "-O3" "-DNDEBUG" )
 set( NJOY21_Clang_Darwin_strict_flags "-Werror" )
@@ -676,8 +676,6 @@ $<$<BOOL:${profile_use}>:${${PREFIX}_profile_use_flags}>
 $<$<BOOL:${link_time_optimization}>:${${PREFIX}_link_time_optimization_flags}> 
 $<$<BOOL:${nonportable_optimization}>:${${PREFIX}_nonportable_optimization_flags}>>
 ${CXX_appended_flags} ${NJOY21_appended_flags} )
-
-target_compile_features( NJOY21 PUBLIC cxx_std_14 )
 
 target_link_libraries( NJOY21 PUBLIC "$<$<AND:$<CONFIG:RELEASE>,$<BOOL:${link_time_optimization}>>:${${PREFIX}_RELEASE_flags};${${PREFIX}_link_time_optimization_flags}$<$<BOOL:${profile_generate}>:${${PREFIX}_profile_generate_flags};>$<$<BOOL:${profile_use}>:${${PREFIX}_profile_use_flags};>$<$<BOOL:${nonportable_optimization}>:${${PREFIX}_nonportable_optimization_flags};>>$<$<CONFIG:DEBUG>:$<$<BOOL:${coverage}>:${${PREFIX}_coverage_flags};>>$<$<BOOL:CXX_appended_flags>:${CXX_appended_flags};>$<$<BOOL:NJOY21_appended_flags>:${NJOY21_appended_flags};>" )
 
