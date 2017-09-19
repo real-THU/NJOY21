@@ -62,6 +62,7 @@ before_build:
   - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "mkdir build"
   - cd build
+  - bash -c "/usr/bin/cmake --version"
   - bash -c "cmake -D unit_tests=OFF -G \"Unix Makefiles\" -Wsubobject-linkage .."
 build_script:
 -
