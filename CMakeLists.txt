@@ -2,16 +2,6 @@
 cmake_minimum_required( VERSION 3.2 ) 
 set( CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Supported configuration types" FORCE )
 
-message( STATUS "CMAKE_COMMAND: " ${CMAKE_COMMAND} )
-
-message( STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME} )
-
-message( STATUS "WIN32: " ${WIN32} )
-
-message( STATUS "CYGWIN: " ${CYGWIN} )
-
-message( STATUS "MINGW: " ${MINGW} )
-        
 if( NOT ROOT_DIRECTORY )
     set( ROOT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
     if ( NOT fetched_subprojects )
@@ -164,18 +154,18 @@ set( NJOY21_AppleClang_Darwin_link_time_optimization_flags "-flto" )
 set( NJOY21_AppleClang_Darwin_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
 set( NJOY21_AppleClang_Darwin_nonportable_optimization_flags "-march=native" )
 set( NJOY21_AppleClang_Darwin_static_flags "-static" )
-set( NJOY21_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
-set( NJOY21_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
-set( NJOY21_RELEASE_flags "-O3" "-DNDEBUG" )
-set( NJOY21_strict_flags "-Werror" )
-set( NJOY21_coverage_flags "--coverage" )
-set( NJOY21_subproject_flags  )
-set( NJOY21_base_project_flags  )
-set( NJOY21_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
-set( NJOY21_link_time_optimization_flags "-flto" )
-set( NJOY21_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
-set( NJOY21_nonportable_optimization_flags "-march=native" )
-set( NJOY21_static_flags "-static" )
+set( NJOY21_Clang_CYGWIN_common_flags "-stdlib=libc++" "-Wall" "-Wextra" "-Wpedantic" "-std=c++14" )
+set( NJOY21_Clang_CYGWIN_DEBUG_flags "-O0" "-g" "-gdwarf-3" )
+set( NJOY21_Clang_CYGWIN_RELEASE_flags "-O3" "-DNDEBUG" )
+set( NJOY21_Clang_CYGWIN_strict_flags "-Werror" )
+set( NJOY21_Clang_CYGWIN_coverage_flags "--coverage" )
+set( NJOY21_Clang_CYGWIN_subproject_flags  )
+set( NJOY21_Clang_CYGWIN_base_project_flags  )
+set( NJOY21_Clang_CYGWIN_profile_generate_flags "-fprofile-generate='${CMAKE_BINARY_DIR}/profiling'" )
+set( NJOY21_Clang_CYGWIN_link_time_optimization_flags "-flto" )
+set( NJOY21_Clang_CYGWIN_profile_use_flags "-fprofile-use='${CMAKE_BINARY_DIR}/profiling'" )
+set( NJOY21_Clang_CYGWIN_nonportable_optimization_flags "-march=native" )
+set( NJOY21_Clang_CYGWIN_static_flags "-static" )
 
 if ( static_NJOY21 )
     set( NJOY21_library_linkage STATIC )
@@ -702,8 +692,6 @@ ${CXX_appended_flags} ${NJOY21_appended_flags} )
 target_link_libraries( NJOY21 PUBLIC "$<$<AND:$<CONFIG:RELEASE>,$<BOOL:${link_time_optimization}>>:${${PREFIX}_RELEASE_flags};${${PREFIX}_link_time_optimization_flags}$<$<BOOL:${profile_generate}>:${${PREFIX}_profile_generate_flags};>$<$<BOOL:${profile_use}>:${${PREFIX}_profile_use_flags};>$<$<BOOL:${nonportable_optimization}>:${${PREFIX}_nonportable_optimization_flags};>>$<$<CONFIG:DEBUG>:$<$<BOOL:${coverage}>:${${PREFIX}_coverage_flags};>>$<$<BOOL:CXX_appended_flags>:${CXX_appended_flags};>$<$<BOOL:NJOY21_appended_flags>:${NJOY21_appended_flags};>" )
 
 target_link_libraries( NJOY21 PUBLIC variant-adapter PUBLIC dimwits PUBLIC njoy_c_bindings PUBLIC tclap-adapter PUBLIC utility PUBLIC ENDFtk )
-
-message( STATUS "PREFIX: " ${PREFIX} )
 
 if ( NOT is_subproject )
     add_executable( NJOY21_executable src/main.cpp )
