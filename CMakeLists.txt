@@ -703,6 +703,8 @@ target_link_libraries( NJOY21 PUBLIC "$<$<AND:$<CONFIG:RELEASE>,$<BOOL:${link_ti
 
 target_link_libraries( NJOY21 PUBLIC variant-adapter PUBLIC dimwits PUBLIC njoy_c_bindings PUBLIC tclap-adapter PUBLIC utility PUBLIC ENDFtk )
 
+message( STATUS "PREFIX: " ${PREFIX} )
+
 if ( NOT is_subproject )
     add_executable( NJOY21_executable src/main.cpp )
     set_target_properties( NJOY21_executable PROPERTIES OUTPUT_NAME NJOY21 )
