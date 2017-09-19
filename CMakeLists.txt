@@ -677,6 +677,8 @@ $<$<BOOL:${link_time_optimization}>:${${PREFIX}_link_time_optimization_flags}>
 $<$<BOOL:${nonportable_optimization}>:${${PREFIX}_nonportable_optimization_flags}>>
 ${CXX_appended_flags} ${NJOY21_appended_flags} )
 
+target_compile_features( NJOY21 PUBLIC cxx_std_14 )
+
 target_link_libraries( NJOY21 PUBLIC "$<$<AND:$<CONFIG:RELEASE>,$<BOOL:${link_time_optimization}>>:${${PREFIX}_RELEASE_flags};${${PREFIX}_link_time_optimization_flags}$<$<BOOL:${profile_generate}>:${${PREFIX}_profile_generate_flags};>$<$<BOOL:${profile_use}>:${${PREFIX}_profile_use_flags};>$<$<BOOL:${nonportable_optimization}>:${${PREFIX}_nonportable_optimization_flags};>>$<$<CONFIG:DEBUG>:$<$<BOOL:${coverage}>:${${PREFIX}_coverage_flags};>>$<$<BOOL:CXX_appended_flags>:${CXX_appended_flags};>$<$<BOOL:NJOY21_appended_flags>:${NJOY21_appended_flags};>" )
 
 target_link_libraries( NJOY21 PUBLIC variant-adapter PUBLIC dimwits PUBLIC njoy_c_bindings PUBLIC tclap-adapter PUBLIC utility PUBLIC ENDFtk )
