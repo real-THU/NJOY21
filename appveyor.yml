@@ -65,7 +65,7 @@ before_build:
   - bash -c "cmake -D unit_tests=OFF -G \"Unix Makefiles\" .."
 build_script:
 -
-    bash -c "make -j2"
+    bash -c "make VERBOSE=1 -j2"
 test_script:
 - 
     bash -c "ctest -j2"
