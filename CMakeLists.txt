@@ -670,7 +670,17 @@ add_library( NJOY21 ${NJOY21_library_linkage}
 
 target_include_directories( NJOY21 PUBLIC src )
 
+message( STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME} )
+
+message( STATUS "CMAKE_CXX_COMPILER_ID: " ${CMAKE_CXX_COMPILER_ID} )
+
 set( PREFIX NJOY21_${CMAKE_CXX_COMPILER_ID}_${CMAKE_SYSTEM_NAME} )
+
+message( STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME} )
+
+message( STATUS "CMAKE_CXX_COMPILER_ID: " ${CMAKE_CXX_COMPILER_ID} )
+
+message( STATUS "PREFIX: " ${PREFIX} )
 
 target_compile_options( NJOY21 PRIVATE 
 ${${PREFIX}_common_flags}
@@ -707,7 +717,7 @@ message( STATUS "APPLE: " ${APPLE} )
 
 message( STATUS "PREFIX: " ${PREFIX} )
 
-message( STATUS "compile options name: " ${PREFIX}"_common_flags" )
+message( STATUS "compile options name: " ${PREFIX}_common_flags )
 
 message( STATUS "compile options: " ${${PREFIX}_common_flags} )
 
