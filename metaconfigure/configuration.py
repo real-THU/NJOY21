@@ -12,7 +12,7 @@ languages['fortran']['standards'] = ['fortran77', 'fortran90', 'fortran95', 'for
 
 languages['c']['file extension']['implementation files'] = ['c']
 languages['c']['file extension']['header files'] = ['h']
-languages['c++']['file extension']['implementation files'] = ['c++', 'cxx', 'cpp', 'cc']
+languages['c++']['file extension']['implementation files'] = ['c++', 'cxx', 'cpp', 'cc', 'C']
 languages['c++']['file extension']['header files'] = ['h++', 'hxx', 'hpp', 'hh', 'h']
 languages['fortran']['file extension']['implementation files'] = ['f', 'for', 'f90']
     
@@ -25,16 +25,22 @@ languages['c++']['compiler']['apple clang++'] = {}
 languages['fortran']['compiler']['gfortran'] = {}
 
 languages['c']['compiler']['gcc']['linux'] = {}
+languages['c']['compiler']['gcc']['cygwin'] = languages['c']['compiler']['gcc']['linux']
+languages['c']['compiler']['gcc']['mingw'] = languages['c']['compiler']['gcc']['linux']
 languages['c']['compiler']['gcc']['osx'] = languages['c']['compiler']['gcc']['linux']
 languages['c']['compiler']['gcc']['windows'] = languages['c']['compiler']['gcc']['linux']
 languages['c']['compiler']['llvm clang']['linux'] = languages['c']['compiler']['gcc']['linux']
 languages['c']['compiler']['llvm clang']['osx'] = languages['c']['compiler']['gcc']['linux']
 languages['c']['compiler']['llvm clang']['windows'] = languages['c']['compiler']['gcc']['linux']
+languages['c']['compiler']['llvm clang']['cygwin'] = languages['c']['compiler']['gcc']['linux']
+languages['c']['compiler']['llvm clang']['mingw'] = languages['c']['compiler']['gcc']['linux']
 languages['c']['compiler']['apple clang']['osx'] = languages['c']['compiler']['gcc']['linux']
 
 languages['fortran']['compiler']['gfortran']['linux'] = {}
 languages['fortran']['compiler']['gfortran']['osx'] = languages['fortran']['compiler']['gfortran']['linux']
 languages['fortran']['compiler']['gfortran']['windows'] = languages['fortran']['compiler']['gfortran']['linux']
+languages['fortran']['compiler']['gfortran']['cygwin'] = languages['fortran']['compiler']['gfortran']['linux']
+languages['fortran']['compiler']['gfortran']['mingw'] = languages['fortran']['compiler']['gfortran']['linux']
 
 languages['c']['compiler']['gcc']['linux']['standard'] = {'c89' : '-std=c90',
                                                           'c99' : '-std=c99',
@@ -94,6 +100,8 @@ languages['fortran']['compiler']['gfortran']['linux']['flags']['profile use'] = 
 
 languages['c++']['compiler']['g++']['linux']['flags'] = copy.deepcopy( languages['c']['compiler']['gcc']['linux']['flags'] )
 languages['c++']['compiler']['g++']['osx'] = copy.deepcopy( languages['c++']['compiler']['g++']['linux'] )
+languages['c++']['compiler']['g++']['cygwin'] = copy.deepcopy( languages['c++']['compiler']['g++']['linux'] )
+languages['c++']['compiler']['g++']['mingw'] = copy.deepcopy( languages['c++']['compiler']['g++']['linux'] )
 languages['c++']['compiler']['g++']['windows'] = languages['c++']['compiler']['g++']['linux']
 
 languages['c++']['compiler']['llvm clang++'] = copy.deepcopy( languages['c++']['compiler']['g++'])
