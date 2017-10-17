@@ -13,26 +13,6 @@ environment:
     CYG_CACHE: "C:\\cygwin\\var\\cache\\setup"
     CYG_BASH: "C:\\cygwin\\bin\\bash"
   matrix:
-    - BUILD_TYPE: release
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: clang
-      CXX: clang++
-    - BUILD_TYPE: release
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: true
-      CC: clang
-      CXX: clang++
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: clang
-      CXX: clang++
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: true
-      CC: clang
-      CXX: clang++
     - BUILD_TYPE: debug
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
@@ -53,19 +33,41 @@ environment:
       STATIC_LIBRARIES: true
       CC: gcc
       CXX: g++
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: clang
+      CXX: clang++
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: clang
+      CXX: clang++
+cache:
+  - '%CYG_CACHE%'
 install:
   - "C:\\cygwin\\setup-x86.exe -q --root \"%CYG_ROOT%\" --site \"%CYG_MIRROR%\" --local-package-dir \"%CYG_CACHE%\" --packages clang,gcc,g++,gcc-fortran,cmake,make,git,python3,tree --force-current"
 clone_folder: C:\cygwin\projects\NJOY21
 before_build:
   - cd C:\cygwin\projects\NJOY21\
   - set PATH=C:\cygwin\bin;%PATH%
-  - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
+    #  - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "mkdir build"
   - cd build
-  - bash -c "cmake -D unit_tests=OFF -G \"Unix Makefiles\" -D PREFIX=\"NJOY21_GNU_Windows\" .."
+  - bash -c "cmake -D static=ON -D unit_tests=OFF -G \"Unix Makefiles\" .."
 build_script:
 -
-    bash -c "make VERBOSE=1"
+    bash -c "make VERBOSE=1 -j2"
 test_script:
 - 
-    bash -c "ctest"
+    bash -c "ctest --output-on-failure -j2"
