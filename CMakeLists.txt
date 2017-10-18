@@ -688,6 +688,9 @@ target_include_directories( NJOY21 PUBLIC src )
 set( PREFIX NJOY21_${CMAKE_CXX_COMPILER_ID}_${CMAKE_SYSTEM_NAME} )
 
 message( STATUS "PREFIX: " ${PREFIX} )
+message( STATUS "COMMON_FLAGS: " ${${PREFIX}_common_flags} )
+message( STATUS "STATIC_FLAGS: " ${${PREFIX}_static_flags} )
+message( STATUS "USE STATIC? " ${static} )
 
 target_compile_options( NJOY21 PRIVATE 
 ${${PREFIX}_common_flags}
