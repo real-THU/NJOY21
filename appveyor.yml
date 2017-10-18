@@ -13,34 +13,6 @@ environment:
     CYG_CACHE: "C:\\cygwin\\var\\cache\\setup"
     CYG_BASH: "C:\\cygwin\\bin\\bash"
   matrix:
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: gcc
-      CXX: g++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
-    - BUILD_TYPE: release
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: gcc
-      CXX: g++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: true
-      CC: gcc
-      CXX: g++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
-    - BUILD_TYPE: release
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: true
-      CC: gcc
-      CXX: g++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
     - BUILD_TYPE: release
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
@@ -67,6 +39,34 @@ environment:
       STATIC_LIBRARIES: true
       CC: clang
       CXX: clang++
+      UNIT_TESTS: false
+      APPENDED_FLAGS: ''
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: gcc
+      CXX: g++
+      UNIT_TESTS: false
+      APPENDED_FLAGS: ''
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: false
+      CC: gcc
+      CXX: g++
+      UNIT_TESTS: false
+      APPENDED_FLAGS: ''
+    - BUILD_TYPE: debug
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: gcc
+      CXX: g++
+      UNIT_TESTS: false
+      APPENDED_FLAGS: ''
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: gcc
+      CXX: g++
       UNIT_TESTS: false
       APPENDED_FLAGS: ''
 cache:
