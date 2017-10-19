@@ -4,7 +4,7 @@ from . import description
 
 language = {'c' : 'C', 'c++' : 'CXX', 'fortran' : 'Fortran'}
 platform = {'linux':'Linux', 'osx':'Darwin', 'windows':'Windows',
-            'cygwin':'CYGWIN', 'mingw':'MINGW'}
+            'mingw':'MINGW', 'cygwin':'CYGWIN'}
 vendor = {'gcc' : 'GNU',
           'g++' : 'GNU',
           'gfortran' : 'GNU',
@@ -23,7 +23,7 @@ def fetch_subprojects(state):
             set( ROOT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
             if ( NOT fetched_subprojects )
                 if ( NOT PYTHON_EXECUTABLE )
-                    find_package( PythonInterp )
+                    find_package( PythonInterp 3.4 )
                     if ( NOT PYTHONINTERP_FOUND )
                         message( FATAL_ERROR "Python interpeter installation was not found." )
                     endif()
@@ -133,7 +133,7 @@ def define_options(state):
     contents="""
 
     # general properties
-    option( {name}_strict "Compile time warnings are converted to errors" {strict} )
+    option( strict "Compile time warnings are converted to errors" {strict} )
     
     # binary instrumentation
     option( coverage "Enable binary instrumentation to collect test coverage information in the DEBUG configuration" )
@@ -192,7 +192,7 @@ def traverse_subprojects(state):
 def define_compiler_flags(state):
     contents="\n"
     for compiler in state['compiler'].keys():        
-        for operating_system in set(['linux','windows','osx','cygwin','mingw']).intersection(state['compiler'][compiler].keys()):
+        for operating_system in set(['linux','windows','osx','mingw','cygwin']).intersection(state['compiler'][compiler].keys()):
             environment=state['compiler'][compiler][operating_system]
             flags=environment['flags']
             args ={ 'name' : state['name'],
@@ -262,7 +262,7 @@ def target_flags_expression(state):
     release = template.format('RELEASE')
 
     option_template = "\n$<$<BOOL:${{{{{0}}}}}>:${{{{${{{{PREFIX}}}}_{0}_flags}}}}>"
-    strict = "\n$<$<BOOL:${{{{{0}}}}}>:${{{{${{{{PREFIX}}}}_strict_flags}}}}>".format('{name}_strict')
+    strict = option_template.format('strict')
     coverage = option_template.format('coverage')
     profile_generate = option_template.format('profile_generate')
     link_time_optimization = option_template.format('link_time_optimization')
@@ -413,9 +413,14 @@ target_include_directories( {name} {policy} {include_path} )
         """
 
     if has_library(state) or has_executable(state) or has_tests(state):
-        contents += """
-set( PREFIX {name}_${{CMAKE_{language}_COMPILER_ID}}_${{CMAKE_SYSTEM_NAME}} )
+        contents += textwrap.dedent(
         """
+set( PREFIX {name}_${{CMAKE_{language}_COMPILER_ID}}_${{CMAKE_SYSTEM_NAME}} )
+message( STATUS "PREFIX: " ${{PREFIX}} )
+message( STATUS "STATIC LIBS? " ${{static}} )
+message( STATUS "STATIC_FLAGS: " ${{${{PREFIX}}_static_flags}} )
+message( STATUS "COMMON_FLAGS: " ${{${{PREFIX}}_common_flags}} )
+        """)
         
     if has_library(state):
         contents += """
@@ -433,7 +438,7 @@ target_link_libraries( {name} {policy} {link_flags} )
 if ( NOT is_subproject )
     add_executable( {name}_executable {driver} )
     set_target_properties( {name}_executable PROPERTIES OUTPUT_NAME {name} )
-    target_compile_options( {name}_executable PRIVATE {indented_compile_flags} )
+    target_compile_options( {name}_executable PRIVATE {compile_flags} )
     target_link_libraries( {name}_executable {policy} {name} )
 endif()
         """)
@@ -444,7 +449,6 @@ endif()
                                            policy=policy,
                                            sources=sources,
                                            compile_flags=compile_flags,
-                                           indented_compile_flags=compile_flags.replace('\n', '\n    '),
                                            link_flags=link_flags,
                                            include_path=state['include path'] if 'include path' in state else ''))
 
@@ -463,12 +467,7 @@ def add_tests(state):
                 if ( unit_tests )"""
                 for test_name, sources in state['tests'].items():
                     executable_name=test_name + '.test'
-                    try:
-                      directory=os.path.dirname(sources[0])
-                    except IndexError:
-                      print("Error while generating CMakeLists.txt for {}".format(executable_name))
-                      print("There seem to be no associated source files. Does this project use unusual file extensions?")
-                      raise
+                    directory=os.path.dirname(sources[0])
                     contents += """
                     add_subdirectory( {} )""".format(directory)
                     test_contents="""
@@ -532,8 +531,9 @@ def install(state):
         targets.append("{name}_executable".format(name=state['name']))
 
     if targets:
-        block = """
-        install( TARGETS ${{installation_targets}} 
+        targets=' '.join(targets)
+        contents += """
+        install( TARGETS {targets} 
                  RUNTIME DESTINATION bin
                  LIBRARY DESTINATION lib
                  ARCHIVE DESTINATION lib
@@ -541,32 +541,11 @@ def install(state):
                              GROUP_EXECUTE GROUP_READ 
                              WORLD_EXECUTE WORLD_READ"""
         if "group id" in state:
-            block += """
+            contents += """
                              SETGID {gid}"""
 
-        block += """ )
+        contents += """ )
         """
-        
-        if has_executable(state):
-            if len(targets) > 1:
-                contents += """
-        set( installation_targets {0} )""".format(targets[0])
-                contents += """
-        if ( NOT is_subproject )
-            list( APPEND installation_targets {0} )
-        endif()
-                """.format(targets[-1])
-                contents += block
-            else:
-                contents += """
-        if ( NOT is_subproject )
-            list( APPEND installation_targets {0} )"""
-                contents += block.replace('\n', '\n    ')
-                contents += """
-        endif()
-                """
-                
-
 
     regex=[]
     if 'include path' in state and is_subdirectory(state['include path'], os.getcwd()):

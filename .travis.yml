@@ -18,6 +18,8 @@ addons:
     - libc++-dev
     - cmake
     - cmake-data
+python:
+  - "3.4"
 language: cpp
 compiler:
 - gcc
