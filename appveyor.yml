@@ -13,34 +13,6 @@ environment:
     CYG_CACHE: "C:\\cygwin\\var\\cache\\setup"
     CYG_BASH: "C:\\cygwin\\bin\\bash"
   matrix:
-    - BUILD_TYPE: release
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: clang
-      CXX: clang++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
-    - BUILD_TYPE: release
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: true
-      CC: clang
-      CXX: clang++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: false
-      CC: clang
-      CXX: clang++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
-    - BUILD_TYPE: debug
-      PLATFORM: cygwin
-      STATIC_LIBRARIES: true
-      CC: clang
-      CXX: clang++
-      UNIT_TESTS: false
-      APPENDED_FLAGS: ''
     - BUILD_TYPE: debug
       PLATFORM: cygwin
       STATIC_LIBRARIES: false
@@ -69,6 +41,41 @@ environment:
       CXX: g++
       UNIT_TESTS: false
       APPENDED_FLAGS: ''
+    - BUILD_TYPE: release
+      PLATFORM: cygwin
+      STATIC_LIBRARIES: true
+      CC: gcc
+      CXX: g++
+      UNIT_TESTS: true
+      APPENDED_FLAGS: ''
+      #    - BUILD_TYPE: release
+      #      PLATFORM: cygwin
+      #      STATIC_LIBRARIES: false
+      #      CC: clang
+      #      CXX: clang++
+      #      UNIT_TESTS: false
+      #      APPENDED_FLAGS: ''
+      #    - BUILD_TYPE: release
+      #      PLATFORM: cygwin
+      #      STATIC_LIBRARIES: true
+      #      CC: clang
+      #      CXX: clang++
+      #      UNIT_TESTS: false
+      #      APPENDED_FLAGS: ''
+      #    - BUILD_TYPE: debug
+      #      PLATFORM: cygwin
+      #      STATIC_LIBRARIES: false
+      #      CC: clang
+      #      CXX: clang++
+      #      UNIT_TESTS: false
+      #      APPENDED_FLAGS: ''
+      #    - BUILD_TYPE: debug
+      #      PLATFORM: cygwin
+      #      STATIC_LIBRARIES: true
+      #      CC: clang
+      #      CXX: clang++
+      #      UNIT_TESTS: false
+      #      APPENDED_FLAGS: ''
 cache:
   - '%CYG_CACHE%'
 install:
@@ -80,7 +87,7 @@ before_build:
     #  - bash -c "python3 ./metaconfigure/fetch_subprojects.py"
   - bash -c "mkdir build"
   - cd build
-  - bash -c "cmake -D static_libraries=$static_libraries -D build_type=$build_type -D appended_flags=\"$appended_flags\" -D unit_tests=$unit_tests -G \"Unix Makefiles\" .."
+  - bash -c "cmake -D static=$STATIC_LIBRARIES -D build_type=$BUILD_TYPE -D appended_flags=\"$APPENDED_FLAGS\" -D unit_tests=$UNIT_TESTS -G \"Unix Makefiles\" .."
 build_script:
 -
     bash -c "make VERBOSE=1 -j2"
