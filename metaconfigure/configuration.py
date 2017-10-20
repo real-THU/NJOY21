@@ -120,6 +120,12 @@ languages['c++']['compiler']['llvm clang++']['windows'] = languages['c++']['comp
 
 languages['c++']['compiler']['apple clang++']['osx'] = languages['c++']['compiler']['llvm clang++']['osx']
 
+languages['c++']['compiler']['g++']['linux']['flags']['common'] += ["-Wno-subobject-linkage"]
+languages['c++']['compiler']['g++']['osx']['flags']['common'] += ["-Wno-subobject-linkage"]
+languages['c++']['compiler']['g++']['windows']['flags']['common'] += ["-Wno-subobject-linkage"]
+languages['c++']['compiler']['g++']['cygwin']['flags']['common'] += ["-Wno-subobject-linkage"]
+languages['c++']['compiler']['g++']['mingw']['flags']['common'] += ["-Wno-subobject-linkage"]
+
 languages['c']['compiler']['gcc']['minimum version'] = '6.2'
 languages['c']['compiler']['llvm clang'] ['minimum version'] = '3.8'
 languages['c']['compiler']['apple clang']['minimum version'] = '8.0'

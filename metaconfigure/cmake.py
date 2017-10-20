@@ -4,7 +4,7 @@ from . import description
 
 language = {'c' : 'C', 'c++' : 'CXX', 'fortran' : 'Fortran'}
 platform = {'linux':'Linux', 'osx':'Darwin', 'windows':'Windows',
-            'mingw':'MINGW', 'cygwin':'CYGWIN'}
+            'cygwin':'CYGWIN', 'mingw':'MINGW'}
 vendor = {'gcc' : 'GNU',
           'g++' : 'GNU',
           'gfortran' : 'GNU',
@@ -133,7 +133,7 @@ def define_options(state):
     contents="""
 
     # general properties
-    option( strict "Compile time warnings are converted to errors" {strict} )
+    option( {name}_strict "Compile time warnings are converted to errors" {strict} )
     
     # binary instrumentation
     option( coverage "Enable binary instrumentation to collect test coverage information in the DEBUG configuration" )
@@ -192,7 +192,7 @@ def traverse_subprojects(state):
 def define_compiler_flags(state):
     contents="\n"
     for compiler in state['compiler'].keys():        
-        for operating_system in set(['linux','windows','osx','mingw','cygwin']).intersection(state['compiler'][compiler].keys()):
+        for operating_system in set(['linux','windows','osx','cygwin','mingw']).intersection(state['compiler'][compiler].keys()):
             environment=state['compiler'][compiler][operating_system]
             flags=environment['flags']
             args ={ 'name' : state['name'],
@@ -467,7 +467,12 @@ def add_tests(state):
                 if ( unit_tests )"""
                 for test_name, sources in state['tests'].items():
                     executable_name=test_name + '.test'
-                    directory=os.path.dirname(sources[0])
+                    try:
+                      directory=os.path.dirname(sources[0])
+                    except IndexError:
+                      print("Error while generating CMakeLists.txt for {}".format(executable_name))
+                      print("There seems to be no associated source files.  Does this project use unusual file extensions?")
+                      raise
                     contents += """
                     add_subdirectory( {} )""".format(directory)
                     test_contents="""
@@ -531,9 +536,8 @@ def install(state):
         targets.append("{name}_executable".format(name=state['name']))
 
     if targets:
-        targets=' '.join(targets)
-        contents += """
-        install( TARGETS {targets} 
+        block = """
+        install( TARGETS ${{installation_targets}} 
                  RUNTIME DESTINATION bin
                  LIBRARY DESTINATION lib
                  ARCHIVE DESTINATION lib
@@ -541,11 +545,30 @@ def install(state):
                              GROUP_EXECUTE GROUP_READ 
                              WORLD_EXECUTE WORLD_READ"""
         if "group id" in state:
-            contents += """
+            block += """
                              SETGID {gid}"""
 
-        contents += """ )
+        block += """ )
         """
+
+        if has_executable(state):
+            if len(targets) > 1:
+                contents += """
+        set( installation_targets {0} )""".format(targets[0])
+                contents += """
+        if ( NOT is_subproject )
+            list( APPEND installation_targets {0} )
+        endif()
+                """.format(targets[-1])
+                contents += block
+            else:
+                contents += """
+        if ( NOT is_subproject )
+            list( APPEND installation_targets {0} )"""
+                contents += block.replace('\n', '\n    ')
+                contents += """
+        endif()
+                """
 
     regex=[]
     if 'include path' in state and is_subdirectory(state['include path'], os.getcwd()):
