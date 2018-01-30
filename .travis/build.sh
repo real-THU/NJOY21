@@ -28,7 +28,7 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   fi;
   export NPROC=$(nproc)
 else
-  export NPROC=$(sysctl -n hw.ncpu)
+  export NPROC=$(sysctl -n hw.physicalcpu)
 fi
 
 
@@ -84,15 +84,19 @@ fi
 rm testing.txt
 
 if $coverage; then
-  pip install --user cpp-coveralls &> coverage_upload.txt
-  script -aec "coveralls -i ../src -i ./src -E \".*/CMakeFiles/.*|.*test\\.cpp\" --root \"..\" --build-root \".\" --gcov-options '\\-lp'" coverage_upload.txt
-  if [ $? -ne 0 ];
-  then
-     echo "failed while coverage report!"
-     cat coverage_upload.txt
-     exit 1
-  fi
-  rm coverage_upload.txt
+  wget http://downloads.sourceforge.net/ltp/lcov-1.13.tar.gz
+  tar xvfz lcov-1.11.tar.gz;
+  make -C lcov-1.13
+  export PATH=$(pwd)/lcov-1.11/bin/:$PATH
+  lcov --capture \
+       --directory . \
+       --base-directory ../src/njoy21 \
+       --output-file coverage.info
+  lcov --extract coverage.info "*njoy21*" \
+       --output-file coverage.info
+  lcov --remove coverage.info "*test*" \
+       --output-file coverage.info
+  bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 fi
 
 exit 0
