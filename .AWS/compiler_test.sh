@@ -18,7 +18,6 @@ echo "-----------------------------------------------------"
 echo
 
 export CORES=$(grep -c ^processor /proc/cpuinfo)
-export CORES=20
 echo "Number cores: ${CORES}"
 
 build_types=(Debug Release)
@@ -47,7 +46,11 @@ for bt in "${build_types[@]}"; do
       failed=true
       results+=("${dir_name}:\t${test_result}")
     fi
-    results+=("${dir_name}:\t 0")
+
+    if [ ${failed} == false ]; then
+      results+=("${dir_name}:\t0")
+    fi
+
     cd ${pwd}
   done
 done

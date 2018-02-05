@@ -43,15 +43,15 @@ with open('output', 'w') as o, \
                                                      fromfile=reference_tape,
                                                      tofile=trial_tape, n=0):
                         diff_file.write(line)
-                      
+
             if should_exit: exit(99)
 
     removed_tapes = list( set( glob.glob('tape*') ) - retained_tapes )
     for tape in removed_tapes:
         os.remove( tape )
-        
+
     for diff in glob.glob('*_diff'):
         os.remove( diff )
-        
+
     os.remove('output')
     os.remove('error')
