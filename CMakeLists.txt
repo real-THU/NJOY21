@@ -1119,6 +1119,7 @@ endif()
 
 if( NOT is_subproject )
     enable_testing() 
+    add_subdirectory( tests )
     if ( unit_tests )
         add_subdirectory( src/njoy21/input/PLOTR/Card6/Ystep/test )
         add_subdirectory( src/njoy21/input/WIMSR/Card4/Sigp/test )
