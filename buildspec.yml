@@ -2,21 +2,36 @@ version: 0.2
 
 env:
   variables:
-    TRAVIS_OS_NAME: "linux"
-    build_type: "coverage"
-    static_libraries: "FALSE"
+    - NPROC=$( nproc )
 
 phases:
   install:
     commands:
-      - apt-get purge cmake
-      - apt-get update -y
-      - apt-get install -y software-properties-common python-software-properties
+      - echo Entered install phase...
+      - echo Install starting on $( date )
+      - apt purge cmake
+      - apt update
+      - apt upgrade -y
+      - apt install -y software-properties-common python-software-properties
       - add-apt-repository -y ppa:ubuntu-toolchain-r/test
       - add-apt-repository -y ppa:george-edison55/cmake-3.x
-      - apt-get update -y
-      - apt-get install -y gcc-6 g++-6 gfortran-6 cmake cmake-data git lcov
+      - apt update
+      - apt install -y gcc-6 g++-6 gfortran-6 cmake cmake-data git lcov
+
+  pre_build:
+    commands:
+      - echo Entered pre-build phase...
+      - echo Pre-build starting on $( date )
+      - mkdir build
+      - cd build
+      - cmake ..
 
   build:
     commands:
-      - ./.travis/build.sh 
+      - echo Entered build phase...
+      - echo Build starting on $( date ) on $NPROC cores...
+      - make -j$NPROC
+      - echo Running tests...
+      - echo Test starting on $( date ) on $NPROC cores...
+      - ctest -j$NPROC --output-on-failure
+      - echo Build and test completed at $( date )
