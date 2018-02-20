@@ -23,6 +23,7 @@ phases:
       - echo Pre-build starting on $( date )
       - mkdir build
       - cd build
+      - FC=$( which gfortran )
       - cmake ..
 
   build:
