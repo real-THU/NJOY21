@@ -1,8 +1,7 @@
 version: 0.2
 
-env:
-  variables:
-    - NPROC=$( nproc )
+##env:
+##  variables:
 
 phases:
   install:
@@ -30,8 +29,8 @@ phases:
     commands:
       - echo Entered build phase...
       - echo Build starting on $( date ) on $NPROC cores...
-      - make -j$NPROC
+      - make -j$( nproc )
       - echo Running tests...
       - echo Test starting on $( date ) on $NPROC cores...
-      - ctest -j$NPROC --output-on-failure
+      - ctest -j$( nproc ) --output-on-failure
       - echo Build and test completed at $( date )
