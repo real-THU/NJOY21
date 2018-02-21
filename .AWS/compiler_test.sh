@@ -17,7 +17,7 @@ echo -e "CXX: version\t" `${CXX} --version`
 echo "-----------------------------------------------------"
 echo
 
-export CORES=$(grep -c ^processor /proc/cpuinfo)
+export CORES=$( nproc )
 echo "Number cores: ${CORES}"
 
 build_types=(Debug Release)

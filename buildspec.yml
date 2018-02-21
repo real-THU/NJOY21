@@ -1,15 +1,17 @@
-
 version: 0.2
 
 phases:
   pre_build:
     commands:
-      - echo "Entered the 'pre_build' phase..."
+      - echo Entered the pre_build phase...
   build:
     commands:
-      - echo "Entered the 'build' phase..."
-      - ./.AWS/gnu_build.sh
-      - ./.AWS/clang_build.sh
+      - echo Entered the build phase...
+      - echo Build phase starting on $( date )
+      - ls -la .AWS/
+      - /bin/bash -c ./.AWS/gnu_build.sh
+      - /bin/bash -c ./.AWS/clang_build.sh
   post_build:
     commands:
-      - echo "Entered the 'post_build' phase..."
+      - echo Entered the post_build phase...
+      - echo Post-build phase starting on $( date )
