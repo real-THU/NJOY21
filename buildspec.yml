@@ -5,15 +5,12 @@ phases:
     commands:
       - echo Entered install phase...
       - echo Install starting on $( date )
-      - apt update
-      - apt upgrade -y
+      - python ./metaconfigure/fetch_subprojects.py
 
   pre_build:
     commands:
       - echo Entered pre-build phase...
       - echo Pre-build starting on $( date )
-      - ls -la
-      - python ./metaconfigure/fetch_subprojects.py
       - mkdir build
       - cd build
       - cmake -Dfetched_subprojects=TRUE ..
