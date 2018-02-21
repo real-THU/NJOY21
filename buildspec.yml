@@ -5,6 +5,7 @@ phases:
     commands:
       - echo Entered the pre_build phase...
       - pwd
+      - ls -la
       - git pull --recurse-submodules
   build:
     commands:
