@@ -8,6 +8,7 @@ phases:
     commands:
       - echo Entered the build phase...
       - echo Build phase starting on $( date )
+      - chmod +x .AWS/*.sh
       - ls -la .AWS/
       - /bin/bash -c ./.AWS/gnu_build.sh
       - /bin/bash -c ./.AWS/clang_build.sh
