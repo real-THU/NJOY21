@@ -12,9 +12,10 @@ phases:
     commands:
       - echo Entered pre-build phase...
       - echo Pre-build starting on $( date )
+      - python3 ./metaconfigure/fetch_subprojects.py
       - mkdir build
       - cd build
-      - cmake ..
+      - cmake -Dfetched_subprojects=TRUE ..
 
   build:
     commands:
