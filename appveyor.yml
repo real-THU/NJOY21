@@ -4,7 +4,7 @@ image:
 shallow_clone: true
 
 environment:
-  MINGW_DIR: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\bin
+  MINGW_DIR: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
   MSYS_DIR: C:\msys64\usr\bin
   Path: C:\Python34-x64;%MINGW_DIR%;%Path%
   matrix:
@@ -146,8 +146,8 @@ environment:
       TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
 
 install:
-  - dir C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\
-  - dir C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\bin\
+  - dir C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\
+  - dir C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin\
   - if [%CMAKE_BUILD%]==[cygwin] C:\cygwin\setup-x86.exe -q --root %CYG_ROOT% --local-package-dir %CYG_CACHE% --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop
 
 before_build:
