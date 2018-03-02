@@ -19,9 +19,9 @@ environment:
       CYG_CACHE: C:\cygwin\var\cache\setup
       CYG_MIRROR: http://cygwin.mirror.constant.com
       CYG_ROOT: C:\cygwin
-      CC: /bin/clang
-      CXX: /bin/clang++
-      FC: /bin/gfortran
+      CC: /c/cygwin/bin/clang
+      CXX: /c/cygwin/bin/clang++
+      FC: /c/cygwin/bin/gfortran
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: cygwin
@@ -70,6 +70,7 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
+      MAKE: "%MSYS_DIR%\\make.exe"
       CC: "%MSYS_DIR%\\gcc.exe"
       CXX: "%MSYS_DIR%\\g++.exe"
       FC: "%MSYS_DIR%\\gfortran.exe"
@@ -110,6 +111,7 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
+      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
       CC: "%MINGW_DIR%\\gcc.exe"
       CXX: "%MINGW_DIR%\\g++.exe"
       FC: "%MINGW_DIR%\\gfortran.exe"
@@ -150,8 +152,9 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
+      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
       CC: "C:\\Program Files\\LLVM\\bin\\clang.exe"
-      CXX: "C:\\Program Files\\LLVM\\bin\\clang++.exe"
+      CXX: "C:\\Program Files\\LLVM\\bin\\clang-cl.exe"
       FC: "%MINGW_DIR%\\gfortran.exe"
       TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64\\usr\\bin;C:\\Program Files\\Git\\usr\\bin"
 
@@ -163,6 +166,7 @@ install:
   - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && ls -la /usr/bin/"
   - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\usr\bin\
   - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\mingw64\bin\
+  - if not [%CMAKE_BUILD%]==[cygwin] dir %MINGW_DIR%
 
 before_build:
   - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
@@ -175,9 +179,9 @@ build_script:
   - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"
 # Non-cygwin builds
   - if not [%CMAKE_BUILD%]==[cygwin] set Path=%TMP_PATH%
-  - if not [%CMAKE_BUILD%]==[cygwin] cmake -D CMAKE_Fortran_COMPILER=C:/msys64/usr/bin/gfortran.exe -D CMAKE_MAKE_PROGRAM=C:/msys64/usr/bin/mingw32-make.exe -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G "%CMAKE_BUILD% Makefiles" ..
+  - if not [%CMAKE_BUILD%]==[cygwin] cmake -D CMAKE_Fortran_COMPILER=%FC% -D CMAKE_CXX_COMPILER=%CXX% -D CMAKE_C_COMPILER=%CC% -D CMAKE_MAKE_PROGRAM=%MAKE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G "%CMAKE_BUILD% Makefiles" ..
   - if not [%CMAKE_BUILD%]==[cygwin] set Path=%OrigPath%
-  - if not [%CMAKE_BUILD%]==[cygwin] mingw32-make -j2
+  - if not [%CMAKE_BUILD%]==[cygwin] %MAKE% -j2
 
 after_build:
   - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && /usr/bin/ctest -j2 --output-on-failure"
