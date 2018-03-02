@@ -4,9 +4,9 @@ image:
 shallow_clone: true
 
 environment:
-  MINGW_DIR: C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin
-  MSYS_DIR: C:\msys64\usr\bin
-  Path: C:\Python34-x64;%MINGW_DIR%;%Path%
+  MINGW_DIR: "C:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin"
+  MSYS_DIR: "C:\\msys64\\usr\\bin"
+  Path: "C:\\Python34-x64;%MINGW_DIR%;%Path%"
   matrix:
     -
       BUILD_TYPE: release
