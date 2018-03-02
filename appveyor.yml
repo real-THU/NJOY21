@@ -70,10 +70,10 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
-      MAKE: %MSYS_DIR%\make.exe
-      CC: %MSYS_DIR%\gcc.exe
-      CXX: %MSYS_DIR%\g++.exe
-      FC: %MSYS_DIR%\gfortran.exe
+      MAKE: "%MSYS_DIR%\\make.exe"
+      CC: "%MSYS_DIR%\\gcc.exe"
+      CXX: "%MSYS_DIR%\\g++.exe"
+      FC: "%MSYS_DIR%\\gfortran.exe"
       TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MSYS_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
 #    -
 #      BUILD_TYPE: release
@@ -111,10 +111,10 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
-      MAKE: %MINGW_DIR%\mingw32-make.exe
-      CC: %MINGW_DIR%\gcc.exe
-      CXX: %MINGW_DIR%\g++.exe
-      FC: %MINGW_DIR%\gfortran.exe
+      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
+      CC: "%MINGW_DIR%\\gcc.exe"
+      CXX: "%MINGW_DIR%\\g++.exe"
+      FC: "%MINGW_DIR%\\gfortran.exe"
       TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
 #    -
 #      BUILD_TYPE: release
@@ -152,12 +152,10 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
-      MAKE: %MINGW_DIR%\mingw32-make.exe
-      CC: C:\Program Files\LLVM\bin\clang.exe
-      CXX: C:\Program Files\LLVM\bin\clang-cl.exe
-#      CC: "C:\\Program Files\\LLVM\\bin\\clang.exe"
-#      CXX: "C:\\Program Files\\LLVM\\bin\\clang-cl.exe"
-      FC: %MINGW_DIR%\gfortran.exe
+      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
+      CC: "C:\\\\Program\\ Files\\\\LLVM\\\\bin\\\\clang.exe"
+      CXX: "C:\\\\Program\\ Files\\\\LLVM\\\\bin\\\\clang-cl.exe"
+      FC: "%MINGW_DIR%\\\\gfortran.exe"
       TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64\\usr\\bin;C:\\Program Files\\Git\\usr\\bin"
 
 install:
