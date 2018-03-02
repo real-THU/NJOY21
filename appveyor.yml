@@ -70,10 +70,10 @@ environment:
       STATIC_LIBS: true
       UNIT_TESTS: false
       clone_folder: "C:\\projects\\NJOY21"
-      MAKE: "%MSYS_DIR%\\make.exe"
-      CC: "%MSYS_DIR%\\gcc.exe"
-      CXX: "%MSYS_DIR%\\g++.exe"
-      FC: "%MSYS_DIR%\\gfortran.exe"
+      MAKE: "C:/msys64/usr/bin/make.exe"
+      CC: "C:/msys64/usr/bin/gcc.exe"
+      CXX: "C:/msys64/usr/bin/g++.exe"
+      FC: "C:/msys64/usr/bin/gfortran.exe"
       TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MSYS_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
 #    -
 #      BUILD_TYPE: release
@@ -171,6 +171,7 @@ install:
 before_build:
   - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
   - if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin
+  - git update checkout --force
 
 build_script:
   - mkdir build
