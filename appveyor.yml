@@ -171,7 +171,7 @@ install:
 before_build:
   - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
   - if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin
-  - git update checkout --force
+  - git submodule update checkout --force
 
 build_script:
   - mkdir build
