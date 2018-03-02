@@ -8,20 +8,20 @@ environment:
   MSYS_DIR: "C:\\msys64\\usr\\bin"
   Path: "C:\\Python34-x64;%MINGW_DIR%;%Path%"
   matrix:
-    -
-      BUILD_TYPE: release
-      CMAKE_BUILD: cygwin
-      STATIC_LIBS: false
-      UNIT_TESTS: true
-      CYGWIN_NOWINPATH: yes
-      clone_folder: "C:\\cygwin\\projects\\NJOY21"
-      CYG_BASH: C:\cygwin\bin\bash
-      CYG_CACHE: C:\cygwin\var\cache\setup
-      CYG_MIRROR: http://cygwin.mirror.constant.com
-      CYG_ROOT: C:\cygwin
-      CC: clang
-      CXX: clang++
-      FC: gfortran
+#    -
+#      BUILD_TYPE: release
+#      CMAKE_BUILD: cygwin
+#      STATIC_LIBS: false
+#      UNIT_TESTS: true
+#      CYGWIN_NOWINPATH: yes
+#      clone_folder: "C:\\cygwin\\projects\\NJOY21"
+#      CYG_BASH: C:\cygwin\bin\bash
+#      CYG_CACHE: C:\cygwin\var\cache\setup
+#      CYG_MIRROR: http://cygwin.mirror.constant.com
+#      CYG_ROOT: C:\cygwin
+#      CC: clang
+#      CXX: clang++
+#      FC: gfortran
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: cygwin
@@ -36,20 +36,20 @@ environment:
 #      CC: /usr/bin/clang
 #      CXX: /usr/bin/clang++
 #      FC: /usr/bin/gfortran
-    -
-      BUILD_TYPE: release
-      CMAKE_BUILD: cygwin
-      STATIC_LIBS: false
-      UNIT_TESTS: true
-      CYGWIN_NOWINPATH: yes
-      clone_folder: "C:\\cygwin\\projects\\NJOY21"
-      CYG_BASH: C:\cygwin\bin\bash
-      CYG_CACHE: C:\cygwin\var\cache\setup
-      CYG_MIRROR: http://cygwin.mirror.constant.com
-      CYG_ROOT: C:\cygwin
-      CC: gcc
-      CXX: g++
-      FC: gfortran
+#    -
+#      BUILD_TYPE: release
+#      CMAKE_BUILD: cygwin
+#      STATIC_LIBS: false
+#      UNIT_TESTS: true
+#      CYGWIN_NOWINPATH: yes
+#      clone_folder: "C:\\cygwin\\projects\\NJOY21"
+#      CYG_BASH: C:\cygwin\bin\bash
+#      CYG_CACHE: C:\cygwin\var\cache\setup
+#      CYG_MIRROR: http://cygwin.mirror.constant.com
+#      CYG_ROOT: C:\cygwin
+#      CC: gcc
+#      CXX: g++
+#      FC: gfortran
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: cygwin
@@ -171,6 +171,7 @@ install:
 before_build:
   - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
   - if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin
+  - dir
   - git submodule update checkout --force
 
 build_script:
