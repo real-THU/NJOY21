@@ -147,8 +147,18 @@ environment:
 
 install:
   - if [%CMAKE_BUILD%]==[cygwin] C:\cygwin\setup-x86.exe -q --root %CYG_ROOT% --local-package-dir %CYG_CACHE% --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop
-  - if [%CMAKE_BUILD%]==[cygwin] which clang++
-  - if [%CMAKE_BUILD%]==[cygwin] clang++ --version
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && which clang++"
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && clang++ --version"
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && which g++"
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && g++ --version"
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && which gfortran"
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && gfortran --version"
+  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && ls -la /usr/bin/"
+  - if not [%CMAKE_BUILD%]==[cygwin] g++ --version
+  - if not [%CMAKE_BUILD%]==[cygwin] gfortran --version
+  - if not [%CMAKE_BUILD%]==[cygwin] clang++ --version
+  - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\usr\bin\
+  - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\mingw64\
 
 before_build:
   - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
