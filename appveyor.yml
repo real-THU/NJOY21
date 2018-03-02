@@ -19,9 +19,9 @@ environment:
       CYG_CACHE: C:\cygwin\var\cache\setup
       CYG_MIRROR: http://cygwin.mirror.constant.com
       CYG_ROOT: C:\cygwin
-      CC: /usr/bin/clang
-      CXX: /usr/bin/clang++
-      FC: /usr/bin/gfortran
+      CC: /bin/clang
+      CXX: /bin/clang++
+      FC: /bin/gfortran
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: cygwin
@@ -144,6 +144,16 @@ environment:
 #      CXX: "%MINGW_DIR%\\g++.exe"
 #      FC: "%MINGW_DIR%\\gfortran.exe"
 #      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
+    -
+      BUILD_TYPE: release
+      CMAKE_BUILD: MinGW
+      STATIC_LIBS: true
+      UNIT_TESTS: false
+      clone_folder: "C:\\projects\\NJOY21"
+      CC: "C:\\Program Files\\LLVM\\bin\\clang.exe"
+      CXX: "C:\\Program Files\\LLVM\\bin\\clang++.exe"
+      FC: "%MINGW_DIR%\\gfortran.exe"
+      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64\\usr\\bin;C:\\Program Files\\Git\\usr\\bin"
 
 install:
   - if [%CMAKE_BUILD%]==[cygwin] C:\cygwin\setup-x86.exe -q --root %CYG_ROOT% --local-package-dir %CYG_CACHE% --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop
@@ -151,14 +161,8 @@ install:
   - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && which -a g++"
   - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && which -a gfortran"
   - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && ls -la /usr/bin/"
-  - if not [%CMAKE_BUILD%]==[cygwin] g++ --version
-  - if not [%CMAKE_BUILD%]==[cygwin] where g++
-  - if not [%CMAKE_BUILD%]==[cygwin] gfortran --version
-  - if not [%CMAKE_BUILD%]==[cygwin] where gfortran
-  - if not [%CMAKE_BUILD%]==[cygwin] clang++ --version
-  - if not [%CMAKE_BUILD%]==[cygwin] where clang++
   - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\usr\bin\
-  - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\mingw64\
+  - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\mingw64\bin\
 
 before_build:
   - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
