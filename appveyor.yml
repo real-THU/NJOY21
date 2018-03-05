@@ -169,12 +169,13 @@ install:
 before_build:
   - 'if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%'
   - 'if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin'
-  - dir
-#  - git submodule update checkout --force
+  - 'if [%CMAKE_BUILD%]==[cygwin] %Path%'
+  - 'dir'
 
 build_script:
-  - mkdir build
-  - cd build
+  - 'mkdir build'
+  - 'cd build'
+  - 'dir'
   - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."'
   - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"'
 # Non-cygwin builds
