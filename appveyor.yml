@@ -175,12 +175,7 @@ build_script:
   - 'mkdir build'
   - 'cd build'
   - 'dir'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "ls /"'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "cd /"'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "echo $PATH"'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "pwd"'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "cd /cygdrive/c/projects/njoy21/ && ls -la && cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" ..  && export PATH=$PATH:/usr/bin && /usr/bin/make -j2"'
 # Non-cygwin builds
   - if not [%CMAKE_BUILD%]==[cygwin] set Path=%TMP_PATH%
   - if not [%CMAKE_BUILD%]==[cygwin] cmake -D CMAKE_Fortran_COMPILER=%FC% -D CMAKE_CXX_COMPILER=%CXX% -D CMAKE_C_COMPILER=%CC% -D CMAKE_MAKE_PROGRAM=%MAKE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G "%CMAKE_BUILD% Makefiles" ..
