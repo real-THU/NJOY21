@@ -160,23 +160,23 @@ environment:
 #      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64\\usr\\bin;C:\\Program Files\\Git\\usr\\bin"
 
 install:
-  - if [%CMAKE_BUILD%]==[cygwin] 'C:\cygwin\setup-x86.exe --quiet-mode --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir "%CYG_CACHE%" --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop'
-  - if [%CMAKE_BUILD%]==[cygwin] 'Path=C:\cygwin\bin;%Path%'
-  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "which -a clang++"'
-  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "which -a g++"'
-  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "which -a gfortran"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] C:\cygwin\setup-x86.exe --quiet-mode --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir "%CYG_CACHE%" --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop'
+  - 'if [%CMAKE_BUILD%]==[cygwin] Path=C:\cygwin\bin;%Path%'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "which -a clang++"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "which -a g++"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "which -a gfortran"'
 
 before_build:
-  - if not [%CMAKE_BUILD%]==[cygwin] 'set OrigPath=%Path%'
-  - if [%CMAKE_BUILD%]==[cygwin] 'set Path=C:\cygwin\bin'
+  - 'if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%'
+  - 'if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin'
   - dir
 #  - git submodule update checkout --force
 
 build_script:
   - mkdir build
   - cd build
-  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."'
-  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"'
 # Non-cygwin builds
   - if not [%CMAKE_BUILD%]==[cygwin] set Path=%TMP_PATH%
   - if not [%CMAKE_BUILD%]==[cygwin] cmake -D CMAKE_Fortran_COMPILER=%FC% -D CMAKE_CXX_COMPILER=%CXX% -D CMAKE_C_COMPILER=%CC% -D CMAKE_MAKE_PROGRAM=%MAKE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G "%CMAKE_BUILD% Makefiles" ..
@@ -184,5 +184,5 @@ build_script:
   - if not [%CMAKE_BUILD%]==[cygwin] %MAKE% -j2
 
 after_build:
-  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/ctest -j2 --output-on-failure"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/ctest -j2 --output-on-failure"'
   - if not [%CMAKE_BUILD%]==[cygwin] ctest -j2 --output-on-failure
