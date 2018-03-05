@@ -1,6 +1,7 @@
 image:
   - "Visual Studio 2017"
 
+# setting shallow_clone to true renders metaconfigure unable to clone the submodules
 shallow_clone: false
 
 environment:
@@ -8,20 +9,20 @@ environment:
   MSYS_DIR: "C:\\msys64\\usr\\bin"
   Path: "C:\\Python34-x64;%MINGW_DIR%;%Path%"
   matrix:
-#    -
-#      BUILD_TYPE: release
-#      CMAKE_BUILD: cygwin
-#      STATIC_LIBS: false
-#      UNIT_TESTS: true
-#      CYGWIN_NOWINPATH: yes
-#      clone_folder: "C:\\cygwin\\projects\\NJOY21"
-#      CYG_BASH: C:\cygwin\bin\bash
-#      CYG_CACHE: C:\cygwin\var\cache\setup
-#      CYG_MIRROR: http://cygwin.mirror.constant.com
-#      CYG_ROOT: C:\cygwin
-#      CC: clang
-#      CXX: clang++
-#      FC: gfortran
+    -
+      BUILD_TYPE: release
+      CMAKE_BUILD: cygwin
+      STATIC_LIBS: false
+      UNIT_TESTS: true
+      CYGWIN_NOWINPATH: yes
+      clone_folder: "C:\\cygwin\\projects\\NJOY21"
+      CYG_BASH: C:\cygwin\bin\bash
+      CYG_CACHE: C:\cygwin\var\cache\setup
+      CYG_MIRROR: http://cygwin.mirror.constant.com
+      CYG_ROOT: C:\cygwin
+      CC: clang
+      CXX: clang++
+      FC: gfortran
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: cygwin
@@ -64,17 +65,17 @@ environment:
 #      CC: /usr/bin/gcc
 #      CXX: /usr/bin/g++
 #      FC: /usr/bin/gfortran
-    -
-      BUILD_TYPE: release
-      CMAKE_BUILD: MSYS
-      STATIC_LIBS: true
-      UNIT_TESTS: false
-      clone_folder: "C:\\projects\\NJOY21"
-      MAKE: "C:/msys64/usr/bin/make.exe"
-      CC: "C:/msys64/usr/bin/gcc.exe"
-      CXX: "C:/msys64/usr/bin/g++.exe"
-      FC: "C:/msys64/usr/bin/gfortran.exe"
-      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MSYS_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
+#    -
+#      BUILD_TYPE: release
+#      CMAKE_BUILD: MSYS
+#      STATIC_LIBS: true
+#      UNIT_TESTS: false
+#      clone_folder: "C:\\projects\\NJOY21"
+#      MAKE: "C:/msys64/usr/bin/make.exe"
+#      CC: "C:/msys64/usr/bin/gcc.exe"
+#      CXX: "C:/msys64/usr/bin/g++.exe"
+#      FC: "C:/msys64/usr/bin/gfortran.exe"
+#      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MSYS_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: MSYS
@@ -105,17 +106,17 @@ environment:
 #      CXX: "%MSYS_DIR%\\g++.exe"
 #      FC: "%MSYS_DIR%\\gfortran.exe"
 #      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MSYS_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
-    -
-      BUILD_TYPE: release
-      CMAKE_BUILD: MinGW
-      STATIC_LIBS: true
-      UNIT_TESTS: false
-      clone_folder: "C:\\projects\\NJOY21"
-      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
-      CC: "%MINGW_DIR%\\gcc.exe"
-      CXX: "%MINGW_DIR%\\g++.exe"
-      FC: "%MINGW_DIR%\\gfortran.exe"
-      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
+#    -
+#      BUILD_TYPE: release
+#      CMAKE_BUILD: MinGW
+#      STATIC_LIBS: true
+#      UNIT_TESTS: false
+#      clone_folder: "C:\\projects\\NJOY21"
+#      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
+#      CC: "%MINGW_DIR%\\gcc.exe"
+#      CXX: "%MINGW_DIR%\\g++.exe"
+#      FC: "%MINGW_DIR%\\gfortran.exe"
+#      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
 #    -
 #      BUILD_TYPE: release
 #      CMAKE_BUILD: MinGW
@@ -146,39 +147,36 @@ environment:
 #      CXX: "%MINGW_DIR%\\g++.exe"
 #      FC: "%MINGW_DIR%\\gfortran.exe"
 #      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64;C:\\Program Files\\Git\\usr\\bin"
-    -
-      BUILD_TYPE: release
-      CMAKE_BUILD: MinGW
-      STATIC_LIBS: true
-      UNIT_TESTS: false
-      clone_folder: "C:\\projects\\NJOY21"
-      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
-      CC: "C:\\\\Program\\ Files\\\\LLVM\\\\bin\\\\clang.exe"
-      CXX: "C:\\\\Program\\ Files\\\\LLVM\\\\bin\\\\clang-cl.exe"
-      FC: "%MINGW_DIR%\\\\gfortran.exe"
-      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64\\usr\\bin;C:\\Program Files\\Git\\usr\\bin"
+#    -
+#      BUILD_TYPE: release
+#      CMAKE_BUILD: MinGW
+#      STATIC_LIBS: true
+#      UNIT_TESTS: false
+#      clone_folder: "C:\\projects\\NJOY21"
+#      MAKE: "%MINGW_DIR%\\mingw32-make.exe"
+#      CC: "C:\\\\Program\\ Files\\\\LLVM\\\\bin\\\\clang.exe"
+#      CXX: "C:\\\\Program\\ Files\\\\LLVM\\\\bin\\\\clang-cl.exe"
+#      FC: "%MINGW_DIR%\\\\gfortran.exe"
+#      TMP_PATH: "C:\\Program Files (x86)\\CMake\\bin;C:\\Python34-x64;%MINGW_DIR%;C:\\Program Files\\Git\\cmd;C:\\msys64\\usr\\bin;C:\\Program Files\\Git\\usr\\bin"
 
 install:
-  - if [%CMAKE_BUILD%]==[cygwin] C:\cygwin\setup-x86.exe -q --root %CYG_ROOT% --local-package-dir %CYG_CACHE% --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop
-  - if [%CMAKE_BUILD%]==[cygwin] Path=C:\cygwin\bin;%Path%
-  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "which -a clang++"
-  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "which -a g++"
-  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "which -a gfortran"
-  - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\usr\bin\
-  - if not [%CMAKE_BUILD%]==[cygwin] dir C:\msys64\mingw64\bin\
-  - if not [%CMAKE_BUILD%]==[cygwin] dir %MINGW_DIR%
+  - if [%CMAKE_BUILD%]==[cygwin] 'C:\cygwin\setup-x86.exe --quiet-mode --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir "%CYG_CACHE%" --packages cmake,make,git,python3,gcc,gcc-g++,gcc-fortran,clang --force-current --no-shortcuts --no-startmenu --no-desktop'
+  - if [%CMAKE_BUILD%]==[cygwin] 'Path=C:\cygwin\bin;%Path%'
+  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "which -a clang++"'
+  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "which -a g++"'
+  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "which -a gfortran"'
 
 before_build:
-  - if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%
-  - if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin
+  - if not [%CMAKE_BUILD%]==[cygwin] 'set OrigPath=%Path%'
+  - if [%CMAKE_BUILD%]==[cygwin] 'set Path=C:\cygwin\bin'
   - dir
 #  - git submodule update checkout --force
 
 build_script:
   - mkdir build
   - cd build
-  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && /usr/bin/cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."
-  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"
+  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."'
+  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/make -j2"'
 # Non-cygwin builds
   - if not [%CMAKE_BUILD%]==[cygwin] set Path=%TMP_PATH%
   - if not [%CMAKE_BUILD%]==[cygwin] cmake -D CMAKE_Fortran_COMPILER=%FC% -D CMAKE_CXX_COMPILER=%CXX% -D CMAKE_C_COMPILER=%CC% -D CMAKE_MAKE_PROGRAM=%MAKE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G "%CMAKE_BUILD% Makefiles" ..
@@ -186,5 +184,5 @@ build_script:
   - if not [%CMAKE_BUILD%]==[cygwin] %MAKE% -j2
 
 after_build:
-  - if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -c "export PATH=$PATH:/usr/bin && /usr/bin/ctest -j2 --output-on-failure"
+  - if [%CMAKE_BUILD%]==[cygwin] '%CYG_BASH% -lc "export PATH=$PATH:/usr/bin && /usr/bin/ctest -j2 --output-on-failure"'
   - if not [%CMAKE_BUILD%]==[cygwin] ctest -j2 --output-on-failure
