@@ -175,6 +175,8 @@ build_script:
   - 'mkdir build'
   - 'cd build'
   - 'dir'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "ls /"'
+  - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "cd /"'
   - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "echo $PATH"'
   - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "pwd"'
   - 'if [%CMAKE_BUILD%]==[cygwin] %CYG_BASH% -lc "cmake -D build_type=%BUILD_TYPE% -D static=%STATIC_LIBS% -D unit_tests=%UNIT_TESTS% -G \"Unix Makefiles\" .."'
