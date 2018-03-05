@@ -169,7 +169,6 @@ install:
 before_build:
   - 'if not [%CMAKE_BUILD%]==[cygwin] set OrigPath=%Path%'
   - 'if [%CMAKE_BUILD%]==[cygwin] set Path=C:\cygwin\bin'
-  - 'if [%CMAKE_BUILD%]==[cygwin] %Path%'
   - 'dir'
 
 build_script:
