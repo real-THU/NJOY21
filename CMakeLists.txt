@@ -1196,10 +1196,6 @@ add_library( njoy21 ${njoy21_library_linkage}
 target_include_directories( njoy21 PUBLIC src )
 
 set( PREFIX njoy21_${CMAKE_CXX_COMPILER_ID}_${CMAKE_SYSTEM_NAME} )
-message( STATUS "PREFIX: " ${PREFIX} )
-message( STATUS "STATIC LIBS? " ${static} )
-message( STATUS "STATIC_FLAGS: " ${${PREFIX}_static_flags} )
-message( STATUS "COMMON_FLAGS: " ${${PREFIX}_common_flags} )
 
 target_compile_options( njoy21 PRIVATE 
 ${${PREFIX}_common_flags}
