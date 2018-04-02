@@ -53,6 +53,56 @@
       }
     },
     "g++": {
+      "cygwin": {
+        "flags": {
+          "base project": [],
+          "common": [
+            "-Wno-subobject-linkage"
+          ],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3",
+            "-fsignaling-nans"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      },
       "linux": {
         "flags": {
           "base project": [],
@@ -107,7 +157,9 @@
       "osx": {
         "flags": {
           "base project": [],
-          "common": [],
+          "common": [
+            "-Wno-subobject-linkage"
+          ],
           "coverage": [
             "--coverage"
           ],
@@ -155,7 +207,9 @@
       "windows": {
         "flags": {
           "base project": [],
-          "common": [],
+          "common": [
+            "-Wno-subobject-linkage"
+          ],
           "coverage": [
             "--coverage"
           ],
@@ -202,6 +256,55 @@
       }
     },
     "llvm clang++": {
+      "cygwin": {
+        "flags": {
+          "base project": [],
+          "common": [
+            "-stdlib=libstdc++"
+          ],
+          "coverage": [
+            "--coverage"
+          ],
+          "debug": [
+            "-O0",
+            "-g",
+            "-gdwarf-3"
+          ],
+          "link time optimization": [
+            "-flto"
+          ],
+          "nonportable optimization": [
+            "-march=native"
+          ],
+          "optimization": [
+            "-O3",
+            "-DNDEBUG"
+          ],
+          "profile generate": [
+            "-fprofile-generate='{profile_path}'"
+          ],
+          "profile use": [
+            "-fprofile-use='{profile_path}'"
+          ],
+          "static": [
+            "-static"
+          ],
+          "strict": [
+            "-Werror"
+          ],
+          "subproject": [],
+          "warning": [
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic"
+          ]
+        },
+        "standard": {
+          "c++11": "-std=c++11",
+          "c++14": "-std=c++14",
+          "c++98": "-std=c++98"
+        }
+      },
       "linux": {
         "flags": {
           "base project": [],
@@ -1253,6 +1356,7 @@
   "include path": "src",
   "initialized": true,
   "is external project": false,
+  "is subproject": false,
   "language": "c++",
   "name": "njoy21",
   "standard": "c++14",
