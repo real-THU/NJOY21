@@ -3,7 +3,7 @@ import textwrap
 from . import description
 
 language = {'c' : 'C', 'c++' : 'CXX', 'fortran' : 'Fortran'}
-platform = {'linux':'Linux', 'osx':'Darwin', 'windows':'Windows', 'cygwin':'Cygwin'}
+platform = {'linux':'Linux', 'osx':'Darwin', 'windows':'Windows', 'cygwin':'CYGWIN'}
 vendor = {'gcc' : 'GNU',
           'g++' : 'GNU',
           'gfortran' : 'GNU',
