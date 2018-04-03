@@ -3,7 +3,8 @@ import textwrap
 from . import description
 
 language = {'c' : 'C', 'c++' : 'CXX', 'fortran' : 'Fortran'}
-platform = {'linux':'Linux', 'osx':'Darwin', 'windows':'Windows', 'cygwin':'CYGWIN'}
+platform = {'linux':'Linux', 'osx':'Darwin', 'windows':'Windows',
+            'cygwin':'CYGWIN', 'mingw':'MinGW'}
 vendor = {'gcc' : 'GNU',
           'g++' : 'GNU',
           'gfortran' : 'GNU',
@@ -18,11 +19,18 @@ def fetch_subprojects(state):
     if state['subprojects']:
         contents += textwrap.dedent(
         """
+        if ( NOT GIT_EXECUTABLE )
+            find_package( Git 2.1 )
+            if ( NOT GIT_FOUND )
+                message( FATAL_ERROR "git installation was not found." )
+            endif()
+        endif()
+
         if( NOT ROOT_DIRECTORY )
             set( ROOT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} )
             if ( NOT fetched_subprojects )
                 if ( NOT PYTHON_EXECUTABLE )
-                    find_package( PythonInterp )
+                    find_package( PythonInterp 3.4 )
                     if ( NOT PYTHONINTERP_FOUND )
                         message( FATAL_ERROR "Python interpeter installation was not found." )
                     endif()
@@ -191,7 +199,7 @@ def traverse_subprojects(state):
 def define_compiler_flags(state):
     contents="\n"
     for compiler in state['compiler'].keys():        
-        for operating_system in set(['linux','windows','osx','cygwin']).intersection(state['compiler'][compiler].keys()):
+        for operating_system in set(['linux','windows','osx','cygwin','mingw']).intersection(state['compiler'][compiler].keys()):
             environment=state['compiler'][compiler][operating_system]
             flags=environment['flags']
             args ={ 'name' : state['name'],
@@ -261,7 +269,7 @@ def target_flags_expression(state):
     release = template.format('RELEASE')
 
     option_template = "\n$<$<BOOL:${{{{{0}}}}}>:${{{{${{{{PREFIX}}}}_{0}_flags}}}}>"
-    strict = option_template.format('{name}_strict')
+    strict = "\n$<$<BOOL:${{{{{0}}}}}>:${{{{${{{{PREFIX}}}}_strict_flags}}}}>".format('{name}_strict')
     coverage = option_template.format('coverage')
     profile_generate = option_template.format('profile_generate')
     link_time_optimization = option_template.format('link_time_optimization')
@@ -462,7 +470,12 @@ def add_tests(state):
                 if ( unit_tests )"""
                 for test_name, sources in state['tests'].items():
                     executable_name=test_name + '.test'
-                    directory=os.path.dirname(sources[0])
+                    try:
+                      directory=os.path.dirname(sources[0])
+                    except IndexError:
+                      print("Error while generating CMakeLists.txt for {}".format(executable_name))
+                      print("There seem to be no associated source files. Does this project use unusual file extensions?")
+                      raise
                     contents += """
                     add_subdirectory( {} )""".format(directory)
                     test_contents="""
@@ -638,6 +651,9 @@ set( CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Supported configura
         contents += add_targets(state)
         contents += add_tests(state) 
         contents += install(state)
+        contents += """
+                    INCLUDE(CPack)
+                    """
         
     with open('CMakeLists.txt', 'w') as CMakeFile:
         CMakeFile.write(contents)
