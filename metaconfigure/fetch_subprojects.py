@@ -30,8 +30,8 @@ def clone_submodule( relative_path ):
       ----------------------------------------
       """.format( relative_path = relative_path ) ) )
     invocation = [ "git", "submodule", "update", "-q","--init", "--", relative_path ]
-    if os.name == "nt":
-        invocation.insert( 0, "powershell" )
+#    if os.name == "nt":
+#        invocation.insert( 0, "powershell" )
 
     clone = subprocess.Popen( invocation )
     clone.communicate()
@@ -46,8 +46,8 @@ def update_repository( git ):
     else:
         print("Checking out revision {}...\n".format( git[ project_name() ] ) )
         invocation = ["git", "pull", "-q", "origin", git[ project_name() ] ]
-    if os.name == "nt":
-        invocation.insert( 0, "powershell" )
+#    if os.name == "nt":
+#        invocation.insert( 0, "powershell" )
     update = subprocess.Popen( invocation )
     update.communicate()
   
@@ -68,6 +68,23 @@ def traverse_dependencies( destination, traversed, git ):
             os.chdir( dependency )
             update_repository( git )
             if not os.path.isdir( os.path.join( destination, dependency ) ):
+                gitfile = open( ".git", 'r' )
+                gitline = gitfile.readline()
+                gitfile.close()
+
+                gitdir = gitline.split(' ')[1].split('\n')[0]
+
+                if not os.path.isabs( gitdir ):
+                    gitdir = os.path.abspath( gitdir )
+
+                    gitline = gitline.split(' ')[0] + ' ' + gitdir + '\n'
+
+                    os.remove( ".git" )
+
+                    gitfile = open( ".git", 'w' )
+                    gitfile.write( gitline )
+                    gitfile.close()
+
                 try:
                     os.symlink( os.getcwd(),
                                 os.path.join( destination, dependency ) )

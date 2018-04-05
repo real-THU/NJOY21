@@ -33,6 +33,23 @@ def traverse_dependencies( destination, traversed ):
             traversed.add( dependency )
             os.chdir( dependency )
             if not os.path.isdir( os.path.join( destination, dependency ) ):
+                gitfile = open( ".git", 'r' )
+                gitline = gitfile.readline()
+                gitfile.close()
+
+                gitdir = gitline.split(' ')[1].split('\n')[0]
+
+                if not os.path.isabs( gitdir ):
+                    gitdir = os.path.abspath( gitdir )
+    
+                    gitline = gitline.split(' ')[0] + ' ' + gitdir + '\n'
+
+                    os.remove( ".git" )
+    
+                    gitfile = open( ".git", 'w' )
+                    gitfile.write( gitline )
+                    gitfile.close()
+
                 try:
                     os.symlink( os.getcwd(),
                                 os.path.join( destination, dependency ) )
